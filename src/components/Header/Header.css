@@ -1,0 +1,11 @@
+header {
+    width: 100%;
+    display: flex;
+    padding: 20px;
+    margin-bottom: 50px;
+    background-color: #000;
+}
+header img {
+    max-width: 100px;
+    margin: 0 auto;
+}
