@@ -24,7 +24,7 @@ export const ProductFilter = (props: ProductFilterProps) => {
                 <select name="productTypeFilter" onChange={onTypeValueChange} >
                     <option value="all">Type</option>
                     {productTypes.map(item => (
-                        <option key={item} value={item}>{capitalizeFirstLetter(item)}</option>
+                        <option data-testid="select-option" key={item} value={item}>{capitalizeFirstLetter(item)}</option>
                     ))}
                 </select>
             }

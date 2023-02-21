@@ -16,7 +16,7 @@ function App() {
   useEffect(() => {
     setIsLoading(true);
     setHasError(false);
-    fetch('../products.json')
+    fetch('http://localhost:3000/products.json')
       .then(response => response.json())
       .then(data => {
         setProducts(data)
