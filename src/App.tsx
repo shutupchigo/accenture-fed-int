@@ -49,7 +49,7 @@ function App() {
       products = arr.filter((item) => {
         if (item) {
           // @ts-ignore
-          if (item['productName'].toLowerCase().includes(value)) {
+          if (item['productName'].toLowerCase().includes(value.toLocaleLowerCase())) {
             return item;
           }
         }
@@ -109,10 +109,10 @@ function App() {
         </ul>
       }
       {isLoading &&
-        <p> Loading Data...</p>
+        <p className='text-center'> Loading Data...</p>
       }
       {hasError &&
-        <p> Sorry, something went wrong.</p>
+        <p className='text-center'> Sorry, something went wrong.</p>
       }
     </main >
   );
