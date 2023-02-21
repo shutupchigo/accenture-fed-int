@@ -1,6 +1,9 @@
-# Getting Started with Create React App
+# Accenture Interview Test
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+Open [https://accenture-fed-int.vercel.app/](https://accenture-fed-int.vercel.app/) to view it in the browser.
+Project URL on [Github](https://github.com/shutupchigo/accenture-fed-int.git).
 
 ## Available Scripts
 
@@ -9,7 +12,6 @@ In the project directory, you can run:
 ### `npm start`
 
 Runs the app in the development mode.\
-Open [https://accenture-fed-int.vercel.app/](https://accenture-fed-int.vercel.app/) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
