@@ -3,16 +3,15 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import { ProductCard } from './components/ProductCard/ProductCard';
 import { ProductFilter } from './components/ProductFilter/ProductFilter';
+import { ProductSearch } from './components/ProductSearch/ProductSearch';
 
 function App() {
 
-
-
+  /** init states */
   const [products, setProducts] = useState([]);
   const [filteredProducts, setfilteredProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
-  const [filterText, setFilterText] = useState('');
 
   useEffect(() => {
     setIsLoading(true);
@@ -30,39 +29,69 @@ function App() {
     setIsLoading(false);
   }, []);
 
-  const filteredProductList = (arr: never[], type: string) => {
 
-    /** return only requested product */
-    let products = arr.filter((item) => {
-      if (type) {
-        return item['type'] == type
-      }
-    })
+  /** return only requested products in the filter */
+  const filteredProductList = (arr: never[], key: string, value: string) => {
+
+    let products = arr;
+
+    /** return products if 'type' key matches with search */
+    if (key === 'type') {
+      products = arr.filter((item) => {
+        if (value) {
+          return item[key] === value
+        }
+      })
+    }
+
+    /** return products if 'productName' key matches with search */
+    if (key === 'productName') {
+      products = arr.filter((item) => {
+        if (item) {
+          // @ts-ignore
+          if (item['productName'].toLowerCase().includes(value)) {
+            return item;
+          }
+        }
+
+      })
+    }
 
     /** Return all products */
-    if (type == 'all') {
+    if (value === 'all' || value === '') {
       products = arr;
     }
 
     return products;
   }
 
-  /** Prep data for dropdown product types in child component */
-  const productTypes: string[] = [...new Set(products.map(item => item['type']))];
 
+  /** data to be sent to child components */
+  const productTypes: string[] = [...new Set(products.map(item => item['type']))];
+  const productNames: string[] = [...new Set(products.map(item => item['productName']))];
+
+
+  /** set products afer dropdown filter selection */
   const onTypeValueSelected = (filteredValue: string) => {
-    setFilterText(filteredValue);
-    setfilteredProducts(filteredProductList(products, filteredValue));
+    setfilteredProducts(filteredProductList(products, 'type', filteredValue));
+  }
+
+  /** set products after using search box */
+  const onNameValueSelected = (filteredValue: string) => {
+    setfilteredProducts(filteredProductList(products, 'productName', filteredValue));
   }
 
 
   return (
     <main>
       <div className="container">
-        <h1 className='text-center'>Products Finder</h1>
+        <h1 className='text-center mb-0 text-purple'>Product Finder</h1>
+        <ProductSearch productNames={productNames} nameValueSelected={onNameValueSelected} />
       </div>
       <div className="product__container--filter">
-        <ProductFilter productTypes={productTypes} typeValueSelected={onTypeValueSelected} />
+        <div className="d-flex justify-between">
+          <ProductFilter productTypes={productTypes} typeValueSelected={onTypeValueSelected} />
+        </div>
       </div>
       {filteredProducts &&
         <ul className="product__container--outer">
