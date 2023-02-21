@@ -17,7 +17,7 @@ export const ProductSearch = (props: productSearchProps) => {
             <form className="productSearchInput">
                 <label htmlFor="productSearch" className="visuallyhidden">Search by Product Name:</label>
                 {productNames &&
-                    <input type="search" name="productSearch" className="d-block" onChange={onNameValueChange} placeholder="Search Product By Name" />
+                    <input type="text" name="productSearch" className="d-block" onChange={onNameValueChange} placeholder="Search Product By Name" />
                 }
             </form>
         </>
